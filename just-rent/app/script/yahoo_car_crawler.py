@@ -59,27 +59,19 @@ def yahoo_car_crawler(url):
     return info_dict
 
 def save_images(soup, car_name):
-        # Find all image tags in the carousel
     image_tags = soup.find_all('img', {'class': 'gabtn'})
-
-    # Create a directory for this car's images
     directory = os.path.join('app', 'static', 'cars-img', car_name)
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    # Download and save each image
     for i, img in enumerate(image_tags):
         if i >= 5:
             break
         img_url = img['src']
         response = requests.get(img_url, stream=True)
 
-        # Check if the image was retrieved successfully
         if response.status_code == 200:
-            # Set decode_content value to True, otherwise the downloaded image file's size will be zero.
             response.raw.decode_content = True
-
-            # Open a local file with wb ( write binary ) permission and write the image into the file
             with open(directory + '/img_'+str(i)+'.jpg', 'wb') as f:
                 shutil.copyfileobj(response.raw, f)
 
