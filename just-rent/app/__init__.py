@@ -22,5 +22,8 @@ def create_app(config_class=Config):
     from app.models import bp as models_bp
     app.register_blueprint(models_bp)
 
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp)
+
     return app
 
