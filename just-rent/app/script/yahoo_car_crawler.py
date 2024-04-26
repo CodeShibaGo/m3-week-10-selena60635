@@ -42,18 +42,21 @@ def yahoo_car_crawler(url):
     info_dict['name'] = car_name
     save_images(soup, car_name)
     for field_key, field in fields_dict.items():
-
-        field_info = spec_wrapper.find('span', string=field)
+        try:
+            field_info = spec_wrapper.find('span', string=field)
         
-        if field_info is not None:
-            field_value = field_info.find_next_sibling('span').text
-            numeric_value = re.search(r'\d+', field_value)  # 使用正則表達式提取數字
-            if numeric_value is not None:
-                info_dict[field_key] = int(numeric_value.group())  # 若提取到數字，則轉換為整數型態
+            if field_info is not None:
+                field_value = field_info.find_next_sibling('span').text
+                numeric_value = re.search(r'\d+', field_value)  # 使用正則表達式提取數字
+                if numeric_value is not None:
+                    info_dict[field_key] = int(numeric_value.group())  # 若提取到數字，則轉換為整數型態
+                else:
+                    info_dict[field_key] = field_value  # 若未提取到數字，則使用原始值
             else:
-                info_dict[field_key] = field_value  # 若未提取到數字，則使用原始值
-        else:
-            info_dict[field_key] = None
+                info_dict[field_key] = None
+
+        except Exception as err:
+            print(f"An error occurred '{field}': {err}")
 
     driver.quit()
     return info_dict
@@ -84,8 +87,8 @@ with open(os.path.join("app/script", "car_list.json"), "r") as file:
 
 cars_info = []
 for i, car in enumerate(car_list):
-    # if i >= 1:
-    #     break
+    if i >= 1:
+        break
     short_link = car['short_link']
     if short_link is not None:
         car_info = yahoo_car_crawler(short_link)

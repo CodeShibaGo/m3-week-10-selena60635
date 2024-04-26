@@ -1,71 +1,3 @@
-// function fetchAndDisplayCars() {
-//   fetch("/api/cars")
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const carContainer = document.getElementById("items-carousel");
-//       const carList = document.createElement("ul");
-//       carList.classList.add("swiper-wrapper");
-
-//       data.forEach((car) => {
-//         const carItem = document.createElement("li");
-//         carItem.className = "swiper-slide";
-//         carItem.innerHTML = `
-//             <div class="de-item mb30">
-//                 <div class="d-img">
-//                     <img src="../static/cars-img/${car.car_name}/img_0.jpg" class="img-fluid" alt="" />
-//                 </div>
-//                 <div class="d-info">
-//                     <div class="d-text">
-//                         <h4>${car.car_name}</h4>
-//                         <div class="d-item_like">
-//                             <i class="fa fa-heart"></i><span>50</span>
-//                         </div>
-//                         <div class="d-atr-group">
-//                             <span class="d-atr"><img src="../static/images/icons/1.svg" alt="" />${car.seat}</span>
-//                             <span class="d-atr"><img src="../static/images/icons/3.svg" alt="" />${car.door}</span>
-//                             <span class="d-atr"><img src="../static/images/icons/4.svg" alt="" />${car.body}</span>
-//                         </div>
-//                         <div class="d-price">
-//                             Daily rate from <span>$265</span>
-//                             <a class="btn-main" href="{{ url_for('controller.cars_single') }}">Rent Now</a>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//           `;
-//         carList.appendChild(carItem);
-//       });
-
-//       carContainer.innerHTML = ""; // 清空容器
-//       carContainer.appendChild(carList);
-
-//       const prevButton = document.createElement("div");
-//       prevButton.classList.add("swiper-button-prev");
-//       prevButton.innerHTML = '<i class="fa fa-chevron-left"></i>';
-//       carContainer.appendChild(prevButton);
-
-//       const nextButton = document.createElement("div");
-//       nextButton.classList.add("swiper-button-next");
-//       nextButton.innerHTML = '<i class="fa fa-chevron-right"></i>';
-//       carContainer.appendChild(nextButton);
-
-//       // 初始化 Swiper 實例
-//       new Swiper(".swiper-container", {
-//         // spaceBetween: 24,
-//         slidesPerView: 3,
-//         navigation: {
-//           nextEl: ".swiper-button-next",
-//           prevEl: ".swiper-button-prev",
-//         },
-//       });
-//     })
-//     .catch((error) => {
-//       console.error("Error fetching data:", error);
-//     });
-// }
-
-// // 頁面加載完成後調用函數
-// window.onload = fetchAndDisplayCars;
 function getCarUrl() {
   const baseUrl = window.location.origin;
   return `${baseUrl}/cars/single`;
@@ -85,10 +17,10 @@ function displayCars() {
         carItem.innerHTML = `
             <div class="card flex-grow-1 d-flex flex-column">
               <div class="card-img">
-                <img src="../static/cars-img/${car.car_name}/img_0.jpg" alt="" />
+                <img src="../static/cars-img/${car.name}/img_0.jpg" alt="" />
               </div>
                 <div class="card-info flex-grow-1 d-flex flex-column">
-                  <h4>${car.car_name}</h4>
+                  <h4>${car.name}</h4>
                   <div class="card-like">
                     <i class="fa fa-heart"></i><span>50</span>
                   </div>

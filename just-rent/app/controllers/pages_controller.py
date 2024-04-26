@@ -17,7 +17,7 @@ def cars_list():
 # @bp.route('/cars/<int:id>')
 @bp.route('/cars/single')
 def cars_single():
-    return render_template('car-single.html', title='Cars Single',  car_id = 'car_id')
+    return render_template('car-single.html', title='Cars Single')
 
 @bp.route('/booking')
 def booking():

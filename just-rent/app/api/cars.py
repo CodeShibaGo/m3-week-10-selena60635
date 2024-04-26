@@ -6,7 +6,7 @@ from flask import Blueprint,request
 
 @bp.route('/api/cars', methods=['GET'])
 def get_cars():
-    sql = text('SELECT id, car_name, seat, door, body, displacement, car_length, wheelbase, power_type, brand, model FROM cars')
+    sql = text('SELECT * FROM cars')
     result = db.session.execute(sql)
 
     cars_list = [dict(row._mapping) for row in result]
