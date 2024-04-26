@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 class Car(db.Model):
     __tablename__ = 'cars'
     id = db.Column(db.Integer, primary_key=True)
-    car_name = db.Column(db.String(255), nullable=False, default='Unknown')
+    name = db.Column(db.String(255), nullable=False, default='Unknown')
     displacement = db.Column(db.Integer, nullable=False, default=0)
     body = db.Column(db.String(255), nullable=False, default='Unknown')
     seat = db.Column(db.Integer, nullable=False, default=0)
